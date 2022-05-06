@@ -17,12 +17,8 @@ def get_five_letter_words(words):
 def filter_five_letter_words(fives, word_pattern='-----', includes=[], exclude_pattern='-----', excludes=[]):
     filtered_word_list = []
 
-    # tmp = [word for word in fives if any([c for c in [*word_pattern]])]
+    # This flow control is intentionally verbose to make the logic easier to read and understand.
     for word in fives:
-        # For every word
-        #   check the pattern vs the word for letter position
-        #   check that the word also contains "includes"
-
         matches_exclude_pattern = any([c for idx, c in enumerate([*exclude_pattern]) if word[idx] == exclude_pattern[idx]])
 
         if not matches_exclude_pattern:
