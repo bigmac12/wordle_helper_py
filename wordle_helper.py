@@ -4,7 +4,7 @@ from pprint import pprint as pp
 
 class WordleHelper:
     def __init__(self):
-        self.DEBUG = False
+        self.DEBUG = True
 
         defaults = {
             'words': self.load_words(),
@@ -19,7 +19,7 @@ class WordleHelper:
 
         for key, value in defaults.items():
             setattr(self, key, defaults.get(key, value))
-            if key != 'words':
+            if key not in ['words', 'filtered_word_list']:
                 key_str = "{}:".format(key).ljust(19, ' ')
                 self.settings_string += "{key_str} {value}\n".format(key_str=key_str, value=value)
 
