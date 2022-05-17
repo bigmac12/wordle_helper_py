@@ -3,14 +3,15 @@ from pprint import pprint as pp
 
 
 class WordleHelper:
-
     def __init__(self):
+        self.DEBUG = False
+
         defaults = {
             'words': self.load_words(),
-            'word_pattern': '-----',
-            'exclude_pattern': '-ti-s',
-            'includes': ['t', 'i', 's'],
-            'excludes': ['o', 'h', 'e', 'r', 'n', 'a', 'l'],
+            'word_pattern': '--i--',
+            'exclude_pattern': 'n--e-',
+            'includes': ['n', 'i', 'e'],
+            'excludes': ['o', 't', 'h', 'r', 'a', 'l', 's'],
             'filtered_word_list': []
         }
 
@@ -19,9 +20,11 @@ class WordleHelper:
         for key, value in defaults.items():
             setattr(self, key, defaults.get(key, value))
             if key != 'words':
-                self.settings_string += "{key}: {value}\n".format(key=key, value=value)
+                key_str = "{}:".format(key).ljust(19, ' ')
+                self.settings_string += "{key_str} {value}\n".format(key_str=key_str, value=value)
 
-        self.__print_settings()
+        if self.DEBUG:
+            self.__print_settings()
 
     def __print_settings(self):
         print("\nCurrent settings")
@@ -62,7 +65,14 @@ class WordleHelper:
         return self.filtered_word_list
 
 
+def column_print(data):
+    for a, b, c in zip(data[::3], data[1::3], data[2::3]):
+        print('{:<30}{:<30}{:<}'.format(a, b, c))
+
+
 if __name__ == '__main__':
     helper = WordleHelper()
     filtered_fives = helper.filter_five_letter_words()
-    pp(filtered_fives)
+
+    print("\nPossible matches:")
+    column_print(filtered_fives)
