@@ -66,6 +66,7 @@ class WordleHelper:
         return self.filtered_word_list
 
 
+@DeprecationWarning
 def column_print(data):
     for a, b, c in zip(data[::3], data[1::3], data[2::3]):
         print('{:<30}{:<30}{:<}'.format(a, b, c))
